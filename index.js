@@ -85,6 +85,11 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).json({ error: err.message });
 });
 
+/* 404 HANDLER */
+app.use((req, res, next) => {
+    res.status(404).send("Sorry can't find that!");
+});
+
 /* SERVER RUNNER */
 const PORT = process.env.PORT || 3000;
 
