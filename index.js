@@ -33,6 +33,10 @@ mongoose
 const talepSchema = require("./validationSchemas/talepSchema");
 
 /* ROUTES */
+app.get("/", (req, res) => {
+    res.send("root");
+});
+
 app.get("/talep", async (req, res, next) => {
     try {
         const requests = await requestsModel.find({}).select({ _id: 0 });
