@@ -7,21 +7,39 @@ const RequestSchema = new Schema({
         type: Number,
         index: true,
         unique: true,
+        // required: true,
     },
-    Şirketİsmi: String,
-    TalepDurumu: String,
+    Şirketİsmi: {
+        type: String,
+        required: true,
+    },
+    TalepDurumu: {
+        type: String,
+        required: true,
+    },
     TalepTürü: {
         type: String,
         default: "Ticari Müşteri-1",
+        required: true,
     },
-    TeslimTarihi: Date,
+    TeslimTarihi: {
+        type: Date,
+        required: true,
+    },
     TaşımaTürü: {
         type: String,
         enum: ["Yurtdışı", "Yurtiçi"],
+        required: true,
     },
     İstasyonlar: {
-        Çıkış: String,
-        Varış: String,
+        Çıkış: {
+            type: String,
+            required: true,
+        },
+        Varış: {
+            type: String,
+            required: true,
+        },
     },
     VagonBilgi: [
         {
@@ -36,6 +54,27 @@ const RequestSchema = new Schema({
             },
         },
     ],
+});
+
+// static functions
+RequestSchema.statics.findMaxTalepNo = async function () {
+    const found = await this.find({}).sort({ TalepNo: -1 }).limit(1);
+
+    const biggestTalepNo = found[0].toObject().TalepNo;
+    return parseInt(biggestTalepNo, 10);
+};
+
+/* MIDDLEWARES */
+// Pre Hook for "TalepNo"
+RequestSchema.pre("save", async function (next) {
+    const doc = this;
+
+    //find the biggest
+    const biggestTalepNo = await requestsModel.findMaxTalepNo();
+
+    doc.TalepNo = biggestTalepNo + 1;
+
+    next();
 });
 
 module.exports = requestsModel = mongoose.model(

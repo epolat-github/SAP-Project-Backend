@@ -1,7 +1,7 @@
 const Joi = require("@hapi/joi");
 
 const talepSchema = Joi.object({
-    TalepNo: Joi.number().required(),
+    // TalepNo: Joi.number().required(),
     Şirketİsmi: Joi.string().required(),
     TalepDurumu: Joi.string().required(),
     TalepTürü: Joi.string().required(),
