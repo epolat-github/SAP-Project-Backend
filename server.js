@@ -89,6 +89,19 @@ app.get("/genelVeri", async (req, res, next) => {
     }
 });
 
+app.get("/talep/:talepNo", async (req, res, next) => {
+    try {
+        const TalepNo = req.params.talepNo;
+        const requests = await requestsModel
+            .findOne({ TalepNo })
+            .select({ _id: 0 });
+        if (!requests) throw createError(404, "Talep bulunamadı.");
+        res.json(requests);
+    } catch (err) {
+        next(err);
+    }
+});
+
 /* ERROR HANDLER */
 app.use((err, req, res, next) => {
     console.error(err.stack);
