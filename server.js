@@ -71,9 +71,15 @@ app.get("/genelVeri", async (req, res, next) => {
             müşterilerModel.find({}).select({ _id: 0 }),
             vagonlarModel.find({}).select({ _id: 0 }),
         ]).then(([eşyalar, istasyonlar, müşteriler, vagonlar]) => {
+            console.log(istasyonlar);
+            const yurtiçiİstasyonlar = istasyonlar[0].toObject()["Yurtiçi"];
+            const yurtdışıİstasyonlar = istasyonlar[1].toObject()["Yurtdışı"];
             res.json({
                 eşyalar,
-                istasyonlar,
+                istasyonlar: {
+                    yurtiçi: yurtiçiİstasyonlar,
+                    yurtdışı: yurtdışıİstasyonlar,
+                },
                 müşteriler,
                 vagonlar,
             });
