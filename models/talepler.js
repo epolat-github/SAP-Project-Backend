@@ -46,7 +46,16 @@ const RequestSchema = new Schema({
             KalemNo: Number,
             VagonTipi: String,
             VagonSayısı: Number,
-            Eşyalar: [String],
+            Eşyalar: [
+                {
+                    Eşyaİsmi: String,
+                    EşyaMiktarı: Number,
+                    EşyaBirimi: {
+                        type: String,
+                        enum: ["ton", "kilo", "adet"],
+                    },
+                },
+            ],
             ToplamYük: Number,
             YükBirimi: {
                 type: String,

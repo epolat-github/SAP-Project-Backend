@@ -18,7 +18,17 @@ const talepSchema = Joi.object({
             KalemNo: Joi.number().required(),
             VagonTipi: Joi.string().required(),
             VagonSayısı: Joi.number().required(),
-            Eşyalar: Joi.array().items(Joi.string().required()).required(),
+            Eşyalar: Joi.array()
+                .items(
+                    Joi.object().keys({
+                        Eşyaİsmi: Joi.string().required(),
+                        EşyaMiktarı: Joi.number().required(),
+                        EşyaBirimi: Joi.string()
+                            .valid("ton", "kilo", "adet")
+                            .required(),
+                    })
+                )
+                .required(),
             ToplamYük: Joi.number().required(),
             YükBirimi: Joi.string().valid("ton", "kilo", "adet").required(),
         })
