@@ -46,6 +46,9 @@ const RequestSchema = new Schema({
             KalemNo: Number,
             VagonTipi: String,
             VagonSayısı: Number,
+            KıymetAlma: Boolean,
+            KrediliTaşıma: Boolean,
+            CariHesap: Boolean,
             Eşyalar: [
                 {
                     Eşyaİsmi: String,

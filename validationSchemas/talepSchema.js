@@ -18,6 +18,9 @@ const talepSchema = Joi.object({
             KalemNo: Joi.number().required(),
             VagonTipi: Joi.string().required(),
             VagonSayısı: Joi.number().required(),
+            KıymetAlma: Joi.boolean().required(),
+            KrediliTaşıma: Joi.boolean().required(),
+            CariHesap: Joi.boolean().required(),
             Eşyalar: Joi.array()
                 .items(
                     Joi.object().keys({
