@@ -27,13 +27,13 @@ const talepSchema = Joi.object({
                         Eşyaİsmi: Joi.string().required(),
                         EşyaMiktarı: Joi.number().required(),
                         EşyaBirimi: Joi.string()
-                            .valid("ton", "kilo", "adet")
+                            .valid("ton", "kilo")
                             .required(),
                     })
                 )
                 .required(),
             ToplamYük: Joi.number().required(),
-            YükBirimi: Joi.string().valid("ton", "kilo", "adet").required(),
+            YükBirimi: Joi.string().valid("ton", "kilo").required(),
         })
     ),
 });

@@ -55,14 +55,14 @@ const RequestSchema = new Schema({
                     EşyaMiktarı: Number,
                     EşyaBirimi: {
                         type: String,
-                        enum: ["ton", "kilo", "adet"],
+                        enum: ["ton", "kilo"],
                     },
                 },
             ],
             ToplamYük: Number,
             YükBirimi: {
                 type: String,
-                enum: ["ton", "kilo", "adet"],
+                enum: ["ton", "kilo"],
             },
         },
     ],
